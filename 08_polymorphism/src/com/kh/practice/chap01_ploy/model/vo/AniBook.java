@@ -12,9 +12,17 @@ public class AniBook extends Book {
 		this.accessAge = accessAge;
 	}
 	
+	public int getAccessAge() {
+		return accessAge;
+	}
+
+	public void setAccessAge(int accessAge) {
+		this.accessAge = accessAge;
+	}
+
 	@Override
 	public String toString() {
-		return super.toString() + Integer.toString(accessAge);
+		return super.toString() + ", 나이제한 : " + Integer.toString(accessAge);
 	}
 }
 

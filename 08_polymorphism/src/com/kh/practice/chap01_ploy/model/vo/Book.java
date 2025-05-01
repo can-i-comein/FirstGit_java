@@ -15,7 +15,33 @@ public class Book {
 		this.publisher = publisher;
 	}
 	
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
 	public String toString() {
-		return title + author + publisher;
+		return "제목 : " + title + ", 작가 : " + author + ", 출판사 : " + publisher;
+		
 	}
 }
