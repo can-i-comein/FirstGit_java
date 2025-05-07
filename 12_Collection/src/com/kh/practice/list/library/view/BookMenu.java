@@ -21,7 +21,7 @@ public class BookMenu {
 			System.out.println("3. 도서 검색 조회");
 			System.out.println("4. 도서 삭제");
 			System.out.println("9. 종료");
-			System.out.println("메뉴 번호 선택 : ");
+			System.out.print("메뉴 번호 선택 : ");
 			menuNum = sc.nextInt();
 			sc.nextLine();
 			
@@ -45,11 +45,13 @@ public class BookMenu {
 	}
 	
 	public void insertBook() {
+		
+		System.out.println("===== 새 도서 추가 =====");
 		System.out.print("도서명 : ");
 		String title = sc.nextLine();
 		System.out.print("저자명 : ");
 		String author = sc.nextLine();
-		System.out.print("장르 : ");
+		System.out.print("장르(1. 인문 / 2. 과학 / 3. 외국어 / 4. 기타) : ");
 		int category = sc.nextInt();
 		String newC = "";
 		switch(category) {
@@ -96,10 +98,12 @@ public class BookMenu {
 			System.out.println("검색 결과가 없습니다.");
 		} else {
 			for (Book b : searchList) {
-				System.out.println(searchList.get(i));
+				System.out.println(b.toString());
 			}
 		}
 	}
+	//향상된 for문을 쓰면 순회중에 요소 제거가 일어나 ConcurrentModificationException 발생
+	//일반 for문을 쓰거나 Iterator 사용
 	public void deleteBook() {
 		System.out.print("삭제할 도서명 입력 : ");
 		String title = sc.nextLine();

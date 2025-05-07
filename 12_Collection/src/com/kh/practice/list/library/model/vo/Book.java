@@ -7,7 +7,6 @@ public class Book {
 	private int price;
 
 	public Book() {
-
 	}
 
 	public Book(String title, String author, String category, int price) {
@@ -51,7 +50,6 @@ public class Book {
 	}
 
 	public String toString() {
-		return "제목 : " + title + "작가 : " + author + "카테고리 : " + category + "가격 : " + price;
+		return title + " / " + author + " / " + category + " / " + price;
 	}
-
 }
