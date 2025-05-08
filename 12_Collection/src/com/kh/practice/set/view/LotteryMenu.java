@@ -1,6 +1,7 @@
 package com.kh.practice.set.view;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.kh.practice.set.controller.LotteryController;
@@ -55,30 +56,47 @@ public class LotteryMenu {
 
 	public void insertObject() {
 		String yesOrNo = "";
-		do {
+		
+		while(true) {
 			System.out.println("추첨 대상자를 추가합니다.");
 			System.out.print("이름 : ");
 			String name = sc.nextLine();
 			System.out.print("핸드폰 번호 : ");
 			String phone = sc.nextLine();
 			Lottery l = new Lottery(name, phone);
-			lc.insertObject(l);
-//			if()
-				
-			System.out.println("더 추가하시겠습니까? (Y/N)");
-			yesOrNo = sc.nextLine();
-		} while (!yesOrNo.equals("N"));
-
+			boolean result = lc.insertObject(l);
+			if(result == false) {
+				System.out.println("중복된 대상입니다. 다시입력하세요");
+				continue;
+			}
+			do {
+				System.out.println("더 추가하시겠습니까? (Y/N)");
+				yesOrNo = sc.nextLine();
+				if(yesOrNo.equalsIgnoreCase("N")) {
+					System.out.println("추가 완료되었습니다.");
+					return;
+				} else if(!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")){
+					System.out.println("Y/N중에 다시 입력하세요");
+				}
+				else 
+					break;
+			} while(!yesOrNo.equalsIgnoreCase("N"));
+		}
 	}
 
 	public void selectAll() {
-		HashSet<Lottery> set = lc.selectAll();
+		HashSet<String> set = lc.selectAll();
 		if(set.isEmpty()) {
 			System.out.println("추첨 대상자가 없습니다.");
-		} else
-			for (Lottery lottery : set) {
-				System.out.println(lottery.toString());
-			}
+		} else {
+			// iterator를 쓰는 이유
+			// 1. Set은 인덱스가 없기 때문에 반복문 대신 사용 (향상된 for문 가능)
+			// 2. 반복도중 안전하게 요소를 제거가능, Set은 foreach로 순회하면서
+			// 	  remove()하면 예외발생
+			Iterator<String> it = set.iterator();
+			while(it.hasNext())
+				System.out.println(it.next());
+		}
 	}
 
 	public void deleteObject() {
@@ -97,6 +115,11 @@ public class LotteryMenu {
 	}
 
 	public void winObject() {
+		HashSet<String> set = lc.winObject();
+		if(set == null) 
+			System.out.println("추첨 대상이 4명 이상이 되어야 합니다.");
+		else
+			System.out.println(set);
 		
 	}
 
